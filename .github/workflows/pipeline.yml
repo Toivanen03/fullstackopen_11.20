@@ -15,8 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Install dependencies
-        run: npm ci
+      - name: Make build script executable
+        run: chmod +x build_step_for_e2e-tests.sh
+      - name: Installing dependencies
+        run: ./build_step_for_e2e-tests.sh
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
@@ -38,9 +40,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Make build script executable
-        run: chmod +x build_step.sh
+        run: chmod +x build_step_for_other_tests.sh
       - name: Run Jest & ESLint tests
-        run: ./build_step.sh
+        run: ./build_step_for_other_tests.sh
       - name: Jest & lint test outcome
         run: echo "Jest and ESLint tests completed."
         if: always()
@@ -109,7 +111,7 @@ jobs:
 
             *${{ github.actor }}* made a ${{ github.event_name }} on **${{ github.repository }}**.  
 
-            **Commit:** [View commit](<https://github.com/Toivanen03/full-stack-open-pokedex/commit/${{ github.sha }}>)  
+            **Commit:** [View commit](<https://github.com/Toivanen03/fullstackopen_11.20/commit/${{ github.sha }}>)  
 
             **Status:**
             🔹 **E2E Tests:** ${{ steps.set-status.outputs.e2e_status }}  

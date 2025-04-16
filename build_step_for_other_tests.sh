@@ -4,7 +4,7 @@ cd Frontend
 
 echo "Compiling and testing the frontend"
 
-echo "Installing dependencies"
+echo "Installing frontend dependencies"
 npm install
 
 echo "Checking code style"
@@ -22,7 +22,7 @@ cd Backend
 
 echo "Compiling and testing the backend"
 
-echo "Installing dependencies"
+echo "Installing backend dependencies"
 npm install
 
 echo "Running tests"
