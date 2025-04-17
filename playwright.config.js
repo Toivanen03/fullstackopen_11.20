@@ -10,7 +10,7 @@ module.exports = defineConfig({
   reporter: 'html',
   use: {
     headless: true,
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:4173',
     trace: 'on-first-retry',
   },
   projects: [
@@ -31,7 +31,7 @@ module.exports = defineConfig({
   ],
 /*  webServer: {
     command: 'npm run start:test:all',
-    port: 5173,
+    port: 4173,
     reuseExistingServer: true,
     cwd: './',
     timeout: 10000,

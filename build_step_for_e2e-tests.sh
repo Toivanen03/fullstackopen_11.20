@@ -23,6 +23,6 @@ echo "Compiling build"
 npm run build
 
 echo "Starting frontend server"
-npm run preview -- --port 5173 &
+npm run preview -- --port 4173 &
 
 cd ..
