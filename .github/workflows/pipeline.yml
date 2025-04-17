@@ -59,10 +59,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Make build script executable
         run: chmod +x other_tests.sh
-      - name: Run Jest & ESLint tests
+      - name: Run other tests
         run: ./other_tests.sh
-      - name: Jest & lint test outcome
-        run: echo "Jest and ESLint tests completed."
+      - name: Other tests outcome
+        run: echo "Other tests completed."
         if: always()
 
   deployment:
@@ -133,7 +133,7 @@ jobs:
 
             **Status:**
             🔹 **E2E Tests:** ${{ steps.set-status.outputs.e2e_status }}  
-            🔹 **Jest/Lint:** ${{ steps.set-status.outputs.other_status }}  
+            🔹 **Other tests:** ${{ steps.set-status.outputs.other_status }}  
             🔹 **Deployment:** ${{ steps.set-status.outputs.deploy_status }}  
             🔹 **Version bump:** ${{ steps.set-status.outputs.bump_status }}  
             ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
