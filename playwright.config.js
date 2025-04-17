@@ -29,11 +29,11 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-  webServer: {
+/*  webServer: {
     command: 'npm run start:test:all',
     port: 5173,
     reuseExistingServer: true,
     cwd: './',
     timeout: 10000,
-  },
+  },*/
 })

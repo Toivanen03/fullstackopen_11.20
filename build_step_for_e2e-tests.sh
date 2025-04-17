@@ -2,6 +2,17 @@
 
 echo "Installing Playwright dependencies"
 npm ci
+npm install --save-dev wait-on
+
+cd Backend
+
+echo "Installing backend dependencies"
+npm ci
+
+echo "Starting backend server"
+npm run start &
+
+cd ..
 
 cd Frontend
 
@@ -11,11 +22,7 @@ npm ci
 echo "Compiling build"
 npm run build
 
-cd ..
-
-cd Backend
-
-echo "Installing backend dependencies"
-npm ci
+echo "Starting frontend server"
+npm run preview -- --port 5173 &
 
 cd ..
