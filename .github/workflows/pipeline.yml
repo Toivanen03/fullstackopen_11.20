@@ -21,10 +21,6 @@ jobs:
         run: ./build_step_for_e2e-tests.sh
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Wait for backend to be ready
-        run: npx wait-on http://localhost:3003
-      - name: Wait for frontend to be ready
-        run: npx wait-on http://localhost:4173
       - name: Run Playwright tests
         run: npm run test -- --reporter=line
       - uses: actions/upload-artifact@v4

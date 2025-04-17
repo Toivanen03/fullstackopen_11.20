@@ -2,7 +2,6 @@
 
 echo "Installing Playwright dependencies"
 npm ci
-npm install --save-dev wait-on
 
 cd Backend
 
