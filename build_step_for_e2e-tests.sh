@@ -8,6 +8,9 @@ cd Frontend
 echo "Installing frontend dependencies"
 npm ci
 
+echo "Compiling build"
+npm run build
+
 cd ..
 
 cd Backend

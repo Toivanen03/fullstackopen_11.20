@@ -1,10 +1,10 @@
 {
-  "name": "5.17-5.23",
-  "version": "1.0.0",
+  "name": "pipeline",
+  "version": "11.20.0",
   "main": "index.js",
   "scripts": {
     "start:test:all": "concurrently \"npm run dev --prefix ./Frontend\" \"npm run dev:test --prefix ./Backend\"",
-    "test": "playwright test --project chromium --ui",
+    "test": "npx playwright test --project=chromium",
     "test:report": "playwright show-report"
   },
   "keywords": [],
