@@ -32,7 +32,7 @@ describe('Confirm the format of a blog:', () => {
 
   test('id-field is not allowed to appear as "_id"', async () => {
     const userAtStart = await User.findOne({ username: 'MarkZ' })
-    const token = jwt.sign({ id: userAtStart.id, username: userAtStart.username }, process.env.SECRET)
+    const token = jwt.sign({ id: userAtStart._id, username: userAtStart.username }, process.env.SECRET)
     const newBlog = {
       title: "Kuinka ymmärtää naisia?",
       author: "Nimetön oman turvallisuuden takia",
@@ -66,7 +66,7 @@ describe('Confirm requests:', () => {
   describe('POST:', () => {
     test('new POST-entry and increment of database with valid token', async () => {
       const userAtStart = await User.findOne({ username: 'MarkZ' })
-      const token = jwt.sign({ id: userAtStart._id, username: userAtStart.username }, process.env.SECRET)
+      const token = jwt.sign({ id: userAtStart.id, username: userAtStart.username }, process.env.SECRET)
     
       const newBlog = {
         title: "Epäsosiaalinen sosiaalinen media",
@@ -108,7 +108,7 @@ describe('Confirm requests:', () => {
 
     test('check for title and url at POST', async () => {
       const userAtStart = await User.findOne({ username: 'MarkZ' })
-      const token = jwt.sign({ id: userAtStart._id, username: userAtStart.username }, process.env.SECRET)
+      const token = jwt.sign({ id: userAtStart.id, username: userAtStart.username }, process.env.SECRET)
 
       const newBlogWithoutTitle = {
         author: "Simo Toivanen",

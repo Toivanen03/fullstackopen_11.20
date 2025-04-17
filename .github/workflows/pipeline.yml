@@ -40,7 +40,9 @@ jobs:
         run: npm run preview -- --port 4173 &
         working-directory: ./Frontend
       - name: Run Playwright tests
-        run: npm run test -- --reporter=line
+        run: npm run test -- --reporter=html,line
+      - name: Generate HTML report
+        run: npx playwright show-report --output=playwright-report
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -58,9 +60,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Make build script executable
-        run: chmod +x build_step_for_other_tests.sh
+        run: chmod +x other_tests.sh
       - name: Run Jest & ESLint tests
-        run: ./build_step_for_other_tests.sh
+        run: ./other_tests.sh
       - name: Jest & lint test outcome
         run: echo "Jest and ESLint tests completed."
         if: always()
