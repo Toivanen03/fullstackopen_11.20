@@ -15,12 +15,32 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Install dependencies
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright
+      - name: Installing Playwright dependencies
         run: npm ci
+      - name: Installing backend dependencies
+        run: npm ci
+        working-directory: ./Backend
+      - name: Installing frontend dependencies
+        run: npm ci
+        working-directory: ./Frontend
+      - name: Compiling build
+        run: npm run build
+        working-directory: ./Frontend
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
+      - name: Starting backend
+        run: npm run start &
+        working-directory: ./Backend
+      - name: Starting frontend
+        run: npm run preview -- --port 4173 &
+        working-directory: ./Frontend
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm run test -- --reporter=html,line
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -38,11 +58,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Make build script executable
-        run: chmod +x build_step.sh
-      - name: Run Jest & ESLint tests
-        run: ./build_step.sh
-      - name: Jest & lint test outcome
-        run: echo "Jest and ESLint tests completed."
+        run: chmod +x other_tests.sh
+      - name: Run other tests
+        run: ./other_tests.sh
+      - name: Other tests outcome
+        run: echo "Other tests completed."
         if: always()
 
   deployment:
@@ -109,11 +129,11 @@ jobs:
 
             *${{ github.actor }}* made a ${{ github.event_name }} on **${{ github.repository }}**.  
 
-            **Commit:** [View commit](<https://github.com/Toivanen03/full-stack-open-pokedex/commit/${{ github.sha }}>)  
+            **Commit:** [View commit](<https://github.com/Toivanen03/fullstackopen_11.20/commit/${{ github.sha }}>)  
 
             **Status:**
             🔹 **E2E Tests:** ${{ steps.set-status.outputs.e2e_status }}  
-            🔹 **Jest/Lint:** ${{ steps.set-status.outputs.other_status }}  
+            🔹 **Other tests:** ${{ steps.set-status.outputs.other_status }}  
             🔹 **Deployment:** ${{ steps.set-status.outputs.deploy_status }}  
             🔹 **Version bump:** ${{ steps.set-status.outputs.bump_status }}  
             ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
